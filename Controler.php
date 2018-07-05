@@ -6,7 +6,8 @@ class Controler{
 		if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			if (isset($_POST['cadastrar'])) {
 				$u = new Usuario();
-				$u->setNome($_POST['nome']);
+				$newstr = filter_var($_POST['nome'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+				$u->setNome($newstr);
 				$u->setLogin($_POST['login']);
 				$u->setSenha($_POST['senha']);
 				$u->setStatus($_POST['status']);
@@ -31,7 +32,8 @@ class Controler{
 		if (isset($_POST['update'])) {
 			$u=new Usuario();
 			$u->setId($_POST['id']);
-			$u->setNome($_POST['nome']);
+			$newstr = filter_var($_POST['nome'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+			$u->setNome($newstr);
 			$u->setLogin($_POST['login']);
 			$u->setSenha($_POST['senha']);
 			$u->setStatus($_POST['status']);
